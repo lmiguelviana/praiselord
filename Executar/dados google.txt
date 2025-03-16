@@ -1,0 +1,11 @@
+Copie o código a seguir e cole na seção <body> do site, onde você quer que a caixa de pesquisa e os resultados sejam renderizados.
+
+<script async src="https://cse.google.com/cse.js?cx=a6853747103fa41b8">
+</script>
+<div class="gcse-search"></div>
+
+ID do mecanismo de pesquisa
+a6853747103fa41b8
+
+URL público
+https://cse.google.com/cse?cx=a6853747103fa41b8

@@ -1,0 +1,1 @@
+// Este arquivo foi removido completamente, pois a funcionalidade de restaurar escala não é mais necessária 

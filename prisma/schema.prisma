@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Ministerio {
+  id          String    @id @default(uuid())
+  nome        String
+  descricao   String
+  isAdmin     Boolean   @default(false)
+  dataCriacao DateTime  @default(now())
+  escalas     Escala[]
+  funcoes     Funcao[]
+  musicas     Musica[]
+  usuarios    Usuario[]
+}
+
+model Usuario {
+  id           String     @id @default(uuid())
+  nome         String
+  email        String     @unique
+  senha        String
+  ministerioId String
+  ministerio   Ministerio @relation(fields: [ministerioId], references: [id])
+  escalas      Escala[]   @relation("EscalaToUsuario")
+  funcoes      Funcao[]   @relation("FuncaoToUsuario")
+}
+
+model Escala {
+  id           String     @id @default(uuid())
+  data         DateTime
+  ministerioId String
+  ministerio   Ministerio @relation(fields: [ministerioId], references: [id])
+  usuarios     Usuario[]  @relation("EscalaToUsuario")
+}
+
+model Musica {
+  id           String     @id @default(uuid())
+  titulo       String
+  letra        String
+  ministerioId String
+  ministerio   Ministerio @relation(fields: [ministerioId], references: [id])
+}
+
+model Funcao {
+  id           String     @id @default(uuid())
+  nome         String
+  descricao    String?
+  ministerioId String
+  ministerio   Ministerio @relation(fields: [ministerioId], references: [id])
+  usuarios     Usuario[]  @relation("FuncaoToUsuario")
+}
+
+model Nota {
+  id       String   @id @default(uuid())
+  conteudo String
+  data     DateTime @default(now())
+}
